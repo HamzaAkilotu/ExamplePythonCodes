@@ -23,20 +23,18 @@ entry_height = Entry(width=20)
 entry_height.pack()
 
 # Result Label
-result_label = Label(text=f"Result:", font=FONT)
+result_label = Label(text="Result:", font=FONT)
 result_label.pack()
 
 
 # Calculate BMI Function
 def calculate_bmi():
-    user_bmi = 0
-    result = ""
-
     try:
-        weight = int(entry_weight.get())
-        height = int(entry_height.get()) / 100
+        weight = float(entry_weight.get())
+        height = float(entry_height.get()) / 100
 
         user_bmi = weight / (height ** 2)
+        result = ""
 
         if user_bmi <= 18.5:
             result = "Underweight"
@@ -47,10 +45,10 @@ def calculate_bmi():
         else:
             result = "Obese"
 
+        result_label.config(text=f"Your BMI is {round(user_bmi, 2)}. You are: {result}")
+
     except ValueError:
-        result = "Enter a Valid Number!"
-    finally:
-        result_label.config(text=f"Result: {result}")
+        result_label.config(text="Enter a Valid Number!")
 
 
 # Calculate Button
@@ -59,3 +57,4 @@ calculate_button.pack()
 
 # Mainloop
 window.mainloop()
+
